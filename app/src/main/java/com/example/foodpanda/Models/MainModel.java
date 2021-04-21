@@ -3,7 +3,8 @@ package com.example.foodpanda.Models;
 public class MainModel {
 
     //--------------Step1-------------//
-    int image;
+    int image; //it is int because we will be getting img from drawables
+
     //Price is in string -- it will be converted into int by database
     String name, price, description;
 

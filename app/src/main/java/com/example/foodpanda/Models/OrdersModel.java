@@ -3,48 +3,52 @@ package com.example.foodpanda.Models;
 public class OrdersModel {
 
     //************Step-20***********// --------step 21----create OrdersAdapter.java
-    int orderImage;
-    String soldItemName, price, orderNumber;
+    int orderImageOS;
+    String soldItemNameOS, priceOS, orderNumberOS;
     //Generate Constructors
 
-    public OrdersModel(int orderImage, String soldItemName, String price, String orderNumber) {
-        this.orderImage = orderImage;
-        this.soldItemName = soldItemName;
-        this.price = price;
-        this.orderNumber = orderNumber;
+    public OrdersModel(int orderImageOS, String soldItemNameOS, String priceOS, String orderNumberOS) {
+        this.orderImageOS = orderImageOS;
+        this.soldItemNameOS = soldItemNameOS;
+        this.priceOS = priceOS;
+        this.orderNumberOS = orderNumberOS;
+    }
+
+    public OrdersModel() {
+
     }
     //Generate setters and getters
 
-    public int getOrderImage() {
-        return orderImage;
+    public int getOrderImageOS() {
+        return orderImageOS;
     }
 
-    public void setOrderImage(int orderImage) {
-        this.orderImage = orderImage;
+    public void setOrderImageOS(int orderImageOS) {
+        this.orderImageOS = orderImageOS;
     }
 
-    public String getSoldItemName() {
-        return soldItemName;
+    public String getSoldItemNameOS() {
+        return soldItemNameOS;
     }
 
-    public void setSoldItemName(String soldItemName) {
-        this.soldItemName = soldItemName;
+    public void setSoldItemNameOS(String soldItemNameOS) {
+        this.soldItemNameOS = soldItemNameOS;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPriceOS() {
+        return priceOS;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPriceOS(String priceOS) {
+        this.priceOS = priceOS;
     }
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public String getOrderNumberOS() {
+        return orderNumberOS;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderNumberOS(String orderNumberOS) {
+        this.orderNumberOS = orderNumberOS;
     }
 
 }

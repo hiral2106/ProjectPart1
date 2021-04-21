@@ -1,10 +1,14 @@
 package com.example.foodpanda;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.foodpanda.Adapters.MainAdapter;
 import com.example.foodpanda.Models.MainModel;
@@ -44,15 +48,33 @@ public class MainActivity extends AppCompatActivity {
         //****************STEP-19************************//
         //Set adapter using binding view
         MainAdapter adapter= new MainAdapter(list, this);
-        binding.recycleview.setAdapter(adapter);
+        binding.recylerview.setAdapter(adapter);
 
         //Show layoutmanager which layout we want
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.recycleview.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.recylerview.setLayoutManager(layoutManager);
 
-        //Till Step 19 -- we have create one design(activity), created model class and added setters getters and constructor
+        //Till Step 19 -- we have created one design(activity), created model class and added setters getters and constructor
         //Then created adapter and in adapter we created one class "viewholder". Then infalted layout and bind data.
         //Added list size and added data in arraylist, used adapter and set linear layout
         //After that we created Order Layout(order_sample.xml) and OrdersModele.java class   ----Next Step 20
+
     }
+    //*********************STEP-38******************Inflating menu -- fOR STEP 39--DBHelper.java
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch (item.getItemId()){
+            case R.id.ordersCart:
+                startActivity(new Intent(MainActivity.this, Order.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }
