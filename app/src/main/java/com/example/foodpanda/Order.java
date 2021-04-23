@@ -24,8 +24,8 @@ public class Order extends AppCompatActivity {
         //setContentView(R.layout.activity_order); --- USE BINDING
         setContentView(binding.getRoot());
 
-       //ArrayList<OrdersModel> list = new ArrayList<>();
- //     list.add(new OrdersModel(R.drawable.momos,"Chicken Momos", "10", "11222106"));
+//       ArrayList<OrdersModel> list = new ArrayList<>();
+//      list.add(new OrdersModel(R.drawable.momos,"Chicken Momos", "10", "11222106"));
 //        list.add(new OrdersModel(R.drawable.veg_manchurian,"Veg Manchurian", "15", "11222107"));
 //        list.add(new OrdersModel(R.drawable.friedmomos,"Fried Momos", "10", "11222108"));
 //        list.add(new OrdersModel(R.drawable.fried_rice,"Fried Rice", "10", "11222109"));

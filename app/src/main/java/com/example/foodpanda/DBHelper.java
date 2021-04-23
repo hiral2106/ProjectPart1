@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 //***********************STEP-33*********************CREATING DATABASE----
 public class DBHelper extends SQLiteOpenHelper {
 
-    final static String DBNAME = "mydatabase.db";
-    final static int DBVERSION = 2; //TO UPDATE VERSION OF DB
+    final static String DBNAME = "mydb.db";
+    final static int DBVERSION = 1; //TO UPDATE VERSION OF DB
 
     public DBHelper(@Nullable Context context) {
         super(context, DBNAME, null, DBVERSION);
@@ -46,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean insertOrder(String name, String phone, int price, int image, String desc, String foodName, int quantity){
+    public boolean insertOrder(String name, String phone, int price, int image, String foodName, String desc, int quantity){
 
         //********************STEP-36*************Inserting data ---Next setp 37 -- DetailActivity.java
         SQLiteDatabase database = getReadableDatabase();
@@ -73,14 +74,22 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<OrdersModel> getOrdersCart(){
         ArrayList<OrdersModel> ordersFromCart = new ArrayList<>();
         SQLiteDatabase database = this.getWritableDatabase();
+        Log.d("TAG", "inside array: ");
         //cursor is to go through all rows one by one in database to show all values using select query.
         Cursor cursor = database.rawQuery("Select id, foodname, image, price from orders", null);
         if (cursor.moveToFirst()){
+            Log.d("TAG", "inside array: if ");
+
+            Log.d("TAG", "getOrdersCart: "+cursor.getColumnCount());
             while (cursor.moveToNext()){
+//                Log.d("TAG", "inside array: if : while ");
                 OrdersModel model = new OrdersModel();
                 model.setOrderNumberOS(cursor.getInt(0)+"");
+//                Log.d("no.", "getOrdersCart: "+model.getOrderNumberOS());
                 model.setSoldItemNameOS(cursor.getString(1));
+//                Log.d("name.", "getOrdersCart: "+model.getSoldItemNameOS());
                 model.setOrderImageOS(cursor.getInt(2));
+//                Log.d("name.", "getOrdersCart: "+model.getSoldItemNameOS());
                 model.setPriceOS(cursor.getInt(3)+"");
                 ordersFromCart.add(model);
             }
@@ -88,6 +97,5 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         database.close();
         return ordersFromCart;
-
     }
 }
