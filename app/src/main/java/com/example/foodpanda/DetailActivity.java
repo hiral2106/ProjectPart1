@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodpanda.databinding.ActivityDetailBinding;
@@ -75,10 +77,45 @@ public class DetailActivity extends AppCompatActivity {
             binding.priceLbl.setText(String.format("%d", cursor.getInt(3)));
             binding.textView.setText(cursor.getString(7));
             binding.detailDescription.setText(cursor.getString(6));
-
+            binding.quantity.setText(cursor.getString(5));
             binding.nameBox.setText(cursor.getString(1));
             binding.phoneBox.setText(cursor.getString(2));
             binding.insertBtn.setText("Update Now");
+
+            ImageView addItem=(ImageView) findViewById(R.id.add);
+            ImageView removeItem=(ImageView) findViewById(R.id.subtract);
+            TextView quantity=(TextView) findViewById(R.id.quantity);
+            int price=Integer.parseInt(binding.priceLbl.getText().toString())/Integer.parseInt(quantity.getText().toString());
+            addItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int Item_quantity=Integer.parseInt(quantity.getText().toString());
+                    int new_value=Item_quantity+1;
+                    quantity.setText(String.valueOf(new_value));
+                    binding.priceLbl.setText(String.format("%d",price*new_value));
+                    Log.d("TAG", "onClick: "+binding.priceLbl.getText().toString());
+                    Log.d("TAG", "onClick: "+quantity.getText().toString());
+                }
+            });
+            removeItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int Item_quantity=Integer.parseInt(quantity.getText().toString());
+                    int new_value;
+                    Log.d("TAG", "onClick: "+price);
+                    if(Item_quantity>1){
+                    new_value=Item_quantity-1;
+                    quantity.setText(String.valueOf(new_value));
+                    binding.priceLbl.setText(String.format("%d",price*new_value));
+                    }
+                    else
+                    {
+                        Log.d("delete Not done", "onClick: quantity can not remove as it's minimum");
+                    }
+                }
+            });
+
+
 
             binding.insertBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,15 +125,14 @@ public class DetailActivity extends AppCompatActivity {
                     Log.d("TAG", "price: " + (binding.priceLbl.getText().toString()));
                     Log.d("TAG", "foodname: " + (binding.textView.getText().toString()));
                     Log.d("TAG", "FoodDesc: " + (binding.detailDescription.getText().toString()));
-
+                    Log.d("quanitity", "quantity: "+Integer.parseInt(binding.quantity.getText().toString()));
 
                     boolean isUpdated = helper.updateOrder(binding.nameBox.getText().toString(),
                             binding.phoneBox.getText().toString(),
                             Integer.parseInt(binding.priceLbl.getText().toString()),
                             image,
                             binding.textView.getText().toString(),
-                            binding.detailDescription.getText().toString(),
-                            1,
+                            binding.detailDescription.getText().toString(), Integer.parseInt(binding.quantity.getText().toString()),
                             id);
                     if (isUpdated)
                         Toast.makeText(DetailActivity.this, "updated", Toast.LENGTH_SHORT).show();
