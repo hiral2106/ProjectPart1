@@ -52,6 +52,16 @@ public class DBHelper extends SQLiteOpenHelper {
         //********************STEP-36*************Inserting data ---Next setp 37 -- DetailActivity.java
         SQLiteDatabase database = getReadableDatabase();
         ContentValues values = new ContentValues();
+        /* id=0
+        name =1
+        phone=2
+        price=3
+        image=4
+        desc =5
+        foodname=6
+        quantity =7
+         */
+
         values.put("name", name); // Key value pair. --value should be same as db
         values.put("phone", phone);
         values.put("price", price);
@@ -98,4 +108,56 @@ public class DBHelper extends SQLiteOpenHelper {
         database.close();
         return ordersFromCart;
     }
+
+    // ********************STEP-43********************NEXT STEP- DETAILACTIVITY
+    public Cursor getOrderById(int id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Log.d("TAG", "inside array: ");
+        //cursor is to go through all rows one by one in database to show all values using select query.
+        Cursor cursor = database.rawQuery("Select * from orders where id = "+ id, null);
+
+        if (cursor!= null)
+            cursor.moveToFirst();
+
+        return cursor;
+    }
+
+    public boolean updateOrder(String name, String phone, int price, int image, String foodName, String desc, int quantity, int id){
+
+        //********************STEP-36*************Inserting data ---Next setp 37 -- DetailActivity.java
+        SQLiteDatabase database = getReadableDatabase();
+        ContentValues values = new ContentValues();
+        /* id=0
+        name =1
+        phone=2
+        price=3
+        image=4
+        desc =5
+        foodname=6
+        quantity =7
+         */
+
+        values.put("name", name); // Key value pair. --value should be same as db
+        values.put("phone", phone);
+        values.put("price", price);
+        values.put("image", image);
+        values.put("description", desc);
+        values.put("foodname", foodName);
+        values.put("quantity", quantity);
+        long row = database.update("orders", values, "id="+id, null);
+
+        if (row<=0){
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+
+
+    public int deleteOrder(String id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.delete("orders", "id="+id, null);
+    }
+
 }

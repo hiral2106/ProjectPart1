@@ -1,6 +1,7 @@
 package com.example.foodpanda.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodpanda.DBHelper;
 import com.example.foodpanda.DetailActivity;
 import com.example.foodpanda.Models.OrdersModel;
 import com.example.foodpanda.R;
@@ -49,6 +53,57 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.viewHolder
         holder.soldItemName.setText(model.getSoldItemNameOS());
         holder.orderNumber.setText(model.getOrderNumberOS());
         holder.price.setText(model.getPriceOS());
+
+        //************************STEP-41**********************//
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailActivity.class);
+                context.startActivity(intent);
+                intent.putExtra("id", Integer.parseInt(model.getOrderNumberOS()));
+                intent.putExtra("type",2);
+                context.startActivity(intent);
+            }
+        });
+
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete Item")
+                        .setIcon(R.drawable.warnigimg)
+                        .setMessage("Are you sure you want to delete?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DBHelper helper= new DBHelper(context);
+                                if (helper.deleteOrder(model.getOrderNumberOS()) >0){
+                    Toast.makeText(context,"Deleted", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(context,"Error", Toast.LENGTH_SHORT).show();
+
+                }
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       // dialog.cancel();
+                    }
+                }).show();
+//                DBHelper helper = new DBHelper(context);
+//                if (helper.deleteOrder(model.getOrderNumberOS()) >0){
+//                    Toast.makeText(context,"Deleted", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(context,"Error", Toast.LENGTH_SHORT).show();
+//
+//                }
+                return false;
+            }
+        });
+
     }
 
     @Override
