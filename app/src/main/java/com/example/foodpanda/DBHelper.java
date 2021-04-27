@@ -57,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
         phone=2
         price=3
         image=4
-        desc =5
+        desc=5
         foodname=6
         quantity =7
          */

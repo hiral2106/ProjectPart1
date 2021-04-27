@@ -62,10 +62,12 @@
                         android:id="@+id/orderNumberOS"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:shadowColor="@color/colorPrimary"
                         android:text="11222106"
-                        android:textColor="#DBEC39" />
+                        android:textColor="#03167E" />
                 </LinearLayout>
 
                 <LinearLayout

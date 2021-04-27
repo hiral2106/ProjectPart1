@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         list.add(new MainModel(R.drawable.veg_manchurian, "Veg Manchurian", "15", "Indo-Chinese dish made with wisps of vegetables formed into dumplings and dunked into a sauce that explodes with hot, sweet, sour and salty flavors."));
         list.add(new MainModel(R.drawable.sesame_chicken, "Sesame Chicken", "13", "Battered chicken fried in a pan and coated with sesame sauce."));
         list.add(new MainModel(R.drawable.fried_rice, "Fried Rice", "10", "Cooked rice that has been stir-fried in a wok or a frying pan and mixed with other ingredients such as eggs, vegetables, seafood."));
-        //list.add(new MainModel(R.drawable., "Fried Rice", "10", "Penne with tripple tomato sauce"));
 
         //****************STEP-19************************//
         //Set adapter using binding view

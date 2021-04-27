@@ -61,9 +61,9 @@ public class DetailActivity extends AppCompatActivity {
                     );
 
                     if (isInserted)
-                        Toast.makeText(DetailActivity.this, "Data Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailActivity.this, "Thank you. Your order has been placed.", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(DetailActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailActivity.this, "Error. Please try again", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -141,7 +141,6 @@ public class DetailActivity extends AppCompatActivity {
 
                 }
             });
-
 
         }
 
